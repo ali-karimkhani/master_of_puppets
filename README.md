@@ -1,1 +1,9 @@
-# master_of_puppets
+# Master Of Puppets
+
+
+## Dependencies
+
+**Software dependencies.**
+
+* VirtualBox
+* Vagrant
