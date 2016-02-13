@@ -1,13 +1,16 @@
 dist: trusty
+sudo: false
 
 language: go
 go:
  - 1.5.3
 
-
 branches:
   only:
     - master
+    
+before_script:
+  - go vet ./...
 
 script:
- - go test -v ./src/sample.go
+ - go test -v ./...

@@ -1,11 +1,18 @@
 class golang (
   $version      = '1.5.3',
-  $workspace    = '/home/app',
+  $workspace    = '/home/go_app',
   $arch         = 'linux-amd64',
-  $download_dir = '/usr/local/src',
+  $download_dir = '/home/go_app/src',
   $download_url = undef,
   $download_timeout = 900,
 ) {
+
+  file { '/etc/profile.d/golang.sh':
+    content => template('golang/golang.sh.erb'),
+    owner   => root,
+    group   => root,
+    mode    => 'a+x',
+  }
 
   if ($download_url) {
     $download_location = $download_url
@@ -46,11 +53,11 @@ class golang (
     before  => Exec['unarchive'],
   }
 
-  file { '/etc/profile.d/golang.sh':
-    content => template('golang/golang.sh.erb'),
-    owner   => root,
-    group   => root,
-    mode    => 'a+x',
+  file { '/home/go_app/bin':
+    ensure => 'directory',
+    owner  => 'vagrant',
+    group  => 'vagrant',
+    mode   => '0755',
   }
 
 }

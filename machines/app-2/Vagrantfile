@@ -16,6 +16,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.box = "ubuntu/trusty64"
 	config.vm.box_check_update = false
 
+	config.vm.hostname = "go-app-2"
+
 	config.ssh.forward_agent = true
 
 	config.vm.provider :virtualbox do |vb|
@@ -26,7 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
 	end
 
-	config.vm.synced_folder ensureDir("#{rootDir}/src"), "/home/app/code",
+	config.vm.synced_folder ensureDir("#{rootDir}/src"), "/home/go_app/code",
 		:nfs => { :mount_options => ["dmode=777","fmode=777"] }
 
 	# port forwarding
@@ -34,6 +36,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.network :private_network, ip: '192.168.10.12'
 
 	config.vm.provision :puppet do |puppet|
+		puppet.facter = { "fqdn" => "local.app", "hostname" => "go-app-2" }
 	  puppet.manifests_path = "#{rootDir}/puppet/manifests"
 		puppet.module_path = "#{rootDir}/puppet/modules"
 	  puppet.manifest_file  = "go_app.pp"
@@ -45,7 +48,7 @@ def configSetup(cfg)
 	getInput("How many cores?", cfg, :cores, 1)
 	getInput("How much memory?", cfg, :memory, 1024)
 	getInputNumber("Port Offset?", cfg, :portOffset, 8000)
-	getInput("VM workspace?", cfg, :ws, "~/workspace/web_mop",
+	getInput("VM workspace?", cfg, :ws, "~/workspace/go_app-2",
 		"This is a shared folder for applications source-code.")
 end
 
