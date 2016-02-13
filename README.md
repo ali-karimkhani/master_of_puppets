@@ -1,5 +1,10 @@
 # Master Of Puppets
 
+This just demonstrate how you can provision and build sample go app in local environment.
+* 3 ubuntu instances: 1 x Web(nginx) and 2 x App(GO)
+* Using puppet to install and configure Nginx with round-robin and install app requirement on nodes.
+* Using simple bash to build and run go app
+
 ![alt tag](diag.png)
 
 ## Dependencies
@@ -8,6 +13,8 @@
 
 * VirtualBox
 * Vagrant
+
+
 
 ## Running stack
 For run and build web with 2x GO app just need to run:
@@ -35,7 +42,3 @@ make destroy_machine ROLE=web
 make destroy_machine ROLE=app-1
 make destroy_machine ROLE=app-2
 ```
-
-## Travis-CI
-
-You can see a build status on Travis-CI: https://travis-ci.org/ali-karimkhani/master_of_puppets
