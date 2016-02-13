@@ -3,8 +3,6 @@ dist: trusty
 language: go
 go:
  - 1.5.3
- - release
- - tip
 
 
 branches:
@@ -12,4 +10,4 @@ branches:
     - master
 
 script:
- - go test -v ./src/
+ - go test -v ./src/sample.go
