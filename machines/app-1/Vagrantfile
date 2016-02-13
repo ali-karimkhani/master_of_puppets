@@ -42,6 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	  puppet.manifest_file  = "go_app.pp"
 	end
 
+	config.vm.provision "shell", path: "#{rootDir}/build.sh"
 end
 
 def configSetup(cfg)

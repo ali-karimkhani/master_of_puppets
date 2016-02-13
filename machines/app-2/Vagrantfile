@@ -28,7 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
 	end
 
-	config.vm.synced_folder ensureDir("#{rootDir}/src"), "/home/go_app/code",
+	config.vm.synced_folder ensureDir("#{rootDir}/src"), "/home/go_app/src/sample",
 		:nfs => { :mount_options => ["dmode=777","fmode=777"] }
 
 	# port forwarding
@@ -42,6 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	  puppet.manifest_file  = "go_app.pp"
 	end
 
+	config.vm.provision "shell", path: "#{rootDir}/build.sh"
 end
 
 def configSetup(cfg)
