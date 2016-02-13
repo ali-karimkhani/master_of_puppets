@@ -1,0 +1,37 @@
+---
+
+- name: Vagrant Setup
+  hosts: default
+
+# Vagrant VM specific setup goes here
+
+##
+# If your VM is sharing a code folder, please uncomment the following section
+# and replace the `api_frog` role name with the actual role.
+#   vars_files:
+#     - ansible/services_roles/api_frog/defaults/main.yml
+#
+#   pre_tasks:
+#     - name: update apt
+#       sudo: yes
+#       command: apt-get update
+#
+#     # Next 2 tasks are fix for Vagrant creating the /home/rescan/code folder on VM boot time as root - for shared
+#     # folder between VM and host OS.
+#     - name: Ensure Rescan API user
+#       sudo: yes
+#       user:
+#         name: "{{ api_frog.user }}"
+#
+#     - name: Ensure home folder permissions
+#       sudo: yes
+#       file:
+#         name: "/home/{{ api_frog.user }}"
+#         owner: "{{ api_frog.user }}"
+#         group: "{{ api_frog.user }}"
+#         state: directory
+
+##
+# Include proper playbook to setup your VM
+# - name: Provision
+#   include: ansible/playbooks/my_service.yml

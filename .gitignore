@@ -1,0 +1,4 @@
+.DS_Store
+
+machines/.bundle
+/machines/*/.vagrant

@@ -1,0 +1,71 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+# include some helpers
+rootDir = File.expand_path('../../')
+require "#{rootDir}/vagrant/config.rb"
+require "#{rootDir}/vagrant/shame.rb"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+	cfg = getConfig()
+
+	config.vm.box = "ubuntu/trusty64"
+	config.vm.box_check_update = false
+
+	config.ssh.forward_agent = true
+
+	# port forwarding
+	# config.vm.network :forwarded_port, guest: 8080, host: cfg[:portOffset] + 80
+
+	# folder sync
+	#config.vm.synced_folder ensureDir("#{cfg[:ws]}/frog-api"), "/home/api_frog/code",
+	#	mount_options: ["dmode=777,fmode=777"]
+
+	config.vm.provider :virtualbox do |vb|
+		vb.customize ["modifyvm", :id, "--memory", cfg[:memory]]
+		vb.customize ["modifyvm", :id, "--cpus", cfg[:cores]]
+
+		vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+		vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+	end
+
+	if ENV['LOCAL_SETUP']
+		config.vm.provision "ansible" do |ansible|
+			ansible.playbook = "local_setup.yml"
+			ansible.ask_sudo_pass = true
+			ansible.limit = "all"
+			ansible.inventory_path = "ansible/inventory/localhost"
+			ansible.verbose = "#{ENV['VERBOSE']}" if ENV['VERBOSE']
+		end
+	end
+
+	config.vm.provision "ansible" do |ansible|
+		ansible.playbook = "provision.yml"
+		ansible.extra_vars = {
+			'hosts' => 'default'
+		}
+		ansible.verbose = "#{ENV['VERBOSE']}" if ENV['VERBOSE']
+
+		# If you need vault passwd file
+		# ansible.vault_password_file = "~/.my_vault_pass"
+	end
+
+end
+
+def configSetup(cfg)
+	getInput("How many cores?", cfg, :cores, 1)
+	getInput("How much memory?", cfg, :memory, 1024)
+	getInputNumber("Port Offset?", cfg, :portOffset, 8000)
+	getInput("VM workspace?", cfg, :ws, "~/workspace/issa",
+		"This is a shared folder for applications source-code.")
+end
+
+# used by ./vagrant/config.rb to get config file name
+# This is relative to the folder from where you run `vagrant up`
+def getConfigFolder()
+	File.expand_path('.')
+end

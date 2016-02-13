@@ -1,0 +1,6 @@
+{
+  "cores": 1,
+  "memory": 1024,
+  "portOffset": 8000,
+  "ws": "~/workspace/"
+}

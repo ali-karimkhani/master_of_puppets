@@ -1,0 +1,14 @@
+---
+
+- name: Setup Local box
+  hosts: localhost
+
+  tasks:
+    - name: update hosts file
+      sudo: yes
+      lineinfile:
+        dest: /etc/hosts
+        regexp: "\\s+{{ item }}$"
+        line: "192.168.10.0 {{ item }}"
+      with_items:
+        - my.service.app.internal
