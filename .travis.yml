@@ -1,0 +1,15 @@
+dist: trusty
+
+language: go
+go:
+ - 1.5.3
+ - release
+ - tip
+
+
+branches:
+  only:
+    - master
+
+script:
+ - go test -v ./src/
