@@ -21,15 +21,12 @@ destroy_machine:
 stack:
 	for nodes in web app-1 app-2 ; do \
 		echo provisioning $$nodes ; \
-		cd machines/$$nodes && vagrant up ; \
-		cd machines/$$nodes && vagrant provision ; \
-		cd ../../ ; \
+		cd machines/$$nodes && vagrant up && vagrant provision ; cd - ; \
 	done
 
 # destroy stack
 destroy_stack:
 	for nodes in web app-1 app-2 ; do \
 		echo destroy $$nodes ; \
-		cd machines/$$nodes && vagrant destroy -f ; \
-		cd ../../ ; \
+		cd machines/$$nodes && vagrant destroy -f ; cd - ; \
 	done
