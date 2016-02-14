@@ -10,12 +10,11 @@ branches:
     - master
 
 before_script:
-  - echo "before"
   - mkdir $GOPATH/src/sample ; cp src/sample.go $GOPATH/src/sample
 
 script:
   - go build sample
 
 after_script:
-  - /home/go_app/bin/sample &
-  - curl localhost:8080 
+  - $GOPATH/bin/sample &
+  - curl localhost:8080
