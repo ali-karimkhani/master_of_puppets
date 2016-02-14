@@ -8,9 +8,9 @@ go:
 branches:
   only:
     - master
-    
+
 before_script:
-  - go vet ./...
+  - . build/envs/ci/env_vars
 
 script:
- - go test -v ./...
+ - go build sample

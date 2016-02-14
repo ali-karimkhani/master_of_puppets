@@ -1,11 +1,5 @@
 class nginx {
 
-	# Symlink guest /home/app to host /vagrant
-	file { '/home/app':
-	  ensure  => 'link',
-	  target  => '/vagrant/app',
-	}
-
 	package { 'nginx':
 	  ensure => 'present',
 	  require => Exec['apt-get update'],

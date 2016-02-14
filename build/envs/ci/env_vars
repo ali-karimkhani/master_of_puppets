@@ -1,0 +1,3 @@
+PATH="/home/go_app/bin:/usr/local/go/bin:$PATH"
+export PATH
+export GOPATH=/home/go_app
