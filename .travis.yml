@@ -11,7 +11,7 @@ branches:
 
 before_script:
   - echo "before"
-  - mkdir sample
+  - mkdir $GOPATH/src/sample ; cp src/sample.go $GOPATH/src/sample
 
 script:
   - go build sample
