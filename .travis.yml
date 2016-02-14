@@ -10,7 +10,8 @@ branches:
     - master
 
 before_script:
-  - . build/envs/ci/env_vars
+  - echo "before"
+  - mkdir sample
 
 script:
   - go build sample
