@@ -33,4 +33,3 @@ destroy_stack:
 		cd machines/$$nodes && vagrant destroy -f ; \
 		cd ../../ ; \
 	done
-	echo "http://localhost:8000/" ; \
