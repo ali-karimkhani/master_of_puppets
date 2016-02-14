@@ -40,3 +40,6 @@ make destroy_machine ROLE=web
 make destroy_machine ROLE=app-1
 make destroy_machine ROLE=app-2
 ```
+
+## Travis-CI
+You can see a build status on Travis-CI: https://travis-ci.org/ali-karimkhani/master_of_puppets
