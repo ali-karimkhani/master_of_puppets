@@ -13,7 +13,7 @@ before_script:
   - mkdir $GOPATH/src/sample ; cp src/sample.go $GOPATH/src/sample
 
 script:
-  - go build sample
+  - go install sample
 
 after_script:
   - $GOPATH/bin/sample &
