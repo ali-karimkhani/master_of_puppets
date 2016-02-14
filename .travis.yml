@@ -13,4 +13,7 @@ before_script:
   - . build/envs/ci/env_vars
 
 script:
- - go build sample
+  - go build sample
+
+after_script:
+  - /home/go_app/bin/sample &
