@@ -18,3 +18,4 @@ script:
 
 after_script:
   - /home/go_app/bin/sample &
+  - curl localhost:8080 
