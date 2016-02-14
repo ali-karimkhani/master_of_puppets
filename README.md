@@ -19,7 +19,7 @@ For run and build web with 2x GO app just need to run:
 ```
 make stack
 ```
-So now you can check the stack from Nginx load-balancer from "http://localhost:8000" (by refreshing the page app message should be changed). Also it possible to connect to nodes app-1: "http://localhost:8001" app-2: "http://localhost:8002"
+So now you can check the stack from Nginx load-balancer from `http://localhost:8000` (by refreshing the page app message should be changed). Also it possible to connect to nodes app-1: `http://localhost:8001` app-2: `http://localhost:8002`
 
 ### Destroy stack
 Run this command to destroy stack
@@ -42,4 +42,6 @@ make destroy_machine ROLE=app-2
 ```
 
 ## Travis-CI
-You can see a build status on Travis-CI: https://travis-ci.org/ali-karimkhani/master_of_puppets
+You can see a build status on Travis-CI: https://travis-ci.org/ali-karimkhani/master_of_puppets.
+If the build will be success you should see the result of `curl localhost:8080` something like this:
+`Hi there, This is served from testing-worker-linux-docker-4f9c9dca-3389-linux-6!`

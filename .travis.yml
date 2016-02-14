@@ -18,13 +18,3 @@ script:
 after_script:
   - $GOPATH/bin/sample &
   - curl localhost:8080
-
-deploy:
-  provider: releases
-  api_key: "baf14d31ad4f5c95d58a1ed0c13321ebb1370512"
-  file:
-    - "/home/travis/gopath/bin/sample"
-  skip_cleanup: true
-  on:
-    tags: true
-    all_branches: true
