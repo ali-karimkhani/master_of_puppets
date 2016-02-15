@@ -1,4 +1,4 @@
-# Master Of Puppets [![Build Status](https://travis-ci.org/ali-karimkhani/master_of_puppets.svg?branch=master)
+# Master Of Puppets ![Build Status](https://travis-ci.org/ali-karimkhani/master_of_puppets.svg?branch=master)
 
 This just demonstrate how you can provision and build sample go app in local environment.
 * 3 ubuntu instances: 1 x Web(nginx) and 2 x App(GO)
